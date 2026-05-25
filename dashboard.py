@@ -6,8 +6,7 @@ import matplotlib.pyplot as plt
 import re
 from collections import Counter
 
-# 🚀 【核心联通】引入你刚刚写好的深度爬虫主函数
-from douban_spider import crawl_douban_deep_loop
+
 
 # 解决中文乱码
 plt.rcParams['font.sans-serif'] = ['Arial Unicode MS', 'SimHei']
