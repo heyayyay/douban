@@ -6,3 +6,6 @@ wordcloud
 matplotlib
 DrissionPage
 pillow
+requests
+re
+pathlib
