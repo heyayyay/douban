@@ -5,12 +5,11 @@ from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 import re
 from collections import Counter
-import requests
-from pathlib import Path
+
 
 
 # 解决中文乱码
-plt.rcParams['font.sans-serif'] = ['Arial Unicode MS', 'SimHei']
+plt.rcParams['font.sans-serif'] = ['WenQuanYi Zen Hei']
 plt.rcParams['axes.unicode_minus'] = False
 
 st.set_page_config(page_title="豆瓣短评文本挖掘看板", page_icon="💬", layout="wide")
@@ -59,32 +58,6 @@ st.markdown("---")
 
 # 4. 文本挖掘核心可视化板块
 @st.cache_resource
-def download_open_source_font():
-    """
-    从 GitHub 下载轻量开源中文字体（思源黑体 Regular 版）
-    返回字体文件的本地路径
-    """
-    # 字体文件将保存在 Streamlit 运行环境的当前目录
-    font_file = Path("NotoSansSC-Regular.otf")
-    
-    # 如果字体文件不存在，自动下载
-    if not font_file.exists():
-        st.info("🔄 首次运行，正在自动下载中文字体...")
-        # 开源稳定的字体下载地址（思源黑体，约 3MB，远小于 GitHub 限制）
-        url = "https://github.com/googlefonts/noto-cjk/raw/main/Sans/OTF/SimplifiedChinese/NotoSansSC-Regular.otf"
-        
-        try:
-            response = requests.get(url, timeout=30)
-            response.raise_for_status()  # 确保下载成功
-            with open(font_file, "wb") as f:
-                f.write(response.content)
-            st.success("✅ 字体下载完成！")
-        except Exception as e:
-            st.error(f"❌ 字体下载失败: {e}")
-            st.stop()
-    
-    return str(font_file)
-FONT_PATH = download_open_source_font()
 if not filtered_df.empty and len(filtered_df['热门短评内容'].str.cat(sep='')) > 0:
     full_text = "".join(filtered_df['热门短评内容'].astype(str))
     full_text = re.sub(r'[^\w\s]', '', full_text)
@@ -98,7 +71,7 @@ if not filtered_df.empty and len(filtered_df['热门短评内容'].str.cat(sep='
         if clean_words:
             plt.clf()  # 清空画布
             wc = WordCloud(
-                font_path='FONT_PATH', # Mac 专用黑体
+                font_path='/usr/share/fonts/truetype/wqy/wqy-zenhei.ttc', # Mac 专用黑体
                 background_color='white',
                 width=600,
                 height=400
