@@ -57,7 +57,6 @@ with col3:
 st.markdown("---")
 
 # 4. 文本挖掘核心可视化板块
-@st.cache_resource
 if not filtered_df.empty and len(filtered_df['热门短评内容'].str.cat(sep='')) > 0:
     full_text = "".join(filtered_df['热门短评内容'].astype(str))
     full_text = re.sub(r'[^\w\s]', '', full_text)
