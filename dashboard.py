@@ -70,7 +70,7 @@ if not filtered_df.empty and len(filtered_df['热门短评内容'].str.cat(sep='
         if clean_words:
             plt.clf()  # 清空画布
             wc = WordCloud(
-                font_path='SimHei.ttf', # Mac 专用黑体
+                font_path='SimHei', # Mac 专用黑体
                 background_color='white',
                 width=600,
                 height=400
